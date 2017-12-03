@@ -62,3 +62,6 @@ class powerup1():
         return pygame.Rect(self.x,self.y,self.width,self.height)
     def kill(self):
         self.active=False
+
+    def draw(self,screen):
+        pygame.draw.rect(screen,(255,255,0),(self.x,self.y,self.width,self.height),2)

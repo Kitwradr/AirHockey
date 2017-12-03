@@ -133,7 +133,8 @@ while True:
     pygame.draw.rect(screen, (255,255,255), divider)
     if powerup1.active==True:
         time1=seconds        
-        pygame.draw.rect(screen,(255,255,0),powerup1.getpowerup1(),2)
+        powerup1.draw(screen)
+        randomflag=0
         
     pygame.display.flip()
     clock.tick(60)
