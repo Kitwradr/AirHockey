@@ -179,13 +179,13 @@ def air_hockey_start(screen, clock, scr_width, scr_height, mute):
 
         screen.fill((60, 90, 100))
 
-        celebText = pygame.font.Font(os.path.join(auxDirectory,'Jelly Crazies.ttf'), 70)
-        largeText = pygame.font.Font('freesansbold.ttf', 50)
-        smallText = pygame.font.Font('freesansbold.ttf', 30)
-        smallerText=pygame.font.Font('freesansbold.ttf', 20)
+        celeb_text = pygame.font.Font(os.path.join(auxDirectory,'Jelly Crazies.ttf'), 70)
+        large_text = pygame.font.Font('freesansbold.ttf', 50)
+        small_text = pygame.font.Font('freesansbold.ttf', 30)
+        smaller_text=pygame.font.Font('freesansbold.ttf', 20)
         color_x = random.randint(0,4)
         color_y = random.randint(0,1)
-        dispText(screen, "AIRHOCKEY", (Scrwidth / 2, 100), celebText, colors[color_x][color_y])
+        disp_text(screen, "AIRHOCKEY", (scr_width / 2, 100), celeb_text, colors[color_x][color_y])
 
 
         # mute and unmute audio code
@@ -278,42 +278,42 @@ def air_hockey_start(screen, clock, scr_width, scr_height, mute):
 
         # difficulty button 'Hard'
         if abs(mouse[0] - 450) < buttonRadius and abs(mouse[1] - 470) < buttonRadius:
-            buttonCircle(screen, colors[4][1], (450, 470), "Hard", largeText, (255, 255, 255),
-                         (Scrwidth / 2 -150, Scrheight / 2 + 170))
+            button_circle(screen, colors[4][1], (450, 470), "Hard", large_text, (255, 255, 255),
+                         (scr_width / 2 -150, scr_height / 2 + 170))
             if click[0] == 1:
                 if music_paused:
                     pygame.mixer.music.unpause()
                 pygame.mixer.music.stop()
                 if player_1_name is "":
-                    return 2, player1_color, player2_color, mute, "Player 1", "Player 2"
+                    return 2, player1_color, player2_color, mute, "Player 1", "Player 2" , powerEnable
                 else:
-                    return 2, player1_color, player2_color, mute, player_1_name, player_2_name
+                    return 2, player1_color, player2_color, mute, player_1_name, player_2_name , powerEnable
         
         else:
-            button_circle(screen, colors[4][1], (600, 470), "Hard", small_text, (255, 255, 255),
-                          (scr_width / 2, scr_height / 2 + 170))
+            button_circle(screen, colors[4][1], (450, 470), "Hard", small_text, (255, 255, 255),
+                          (scr_width / 2-150, scr_height / 2 + 170))
 
         #Button to enable or disable powerups
         
         if abs(mouse[0] - 700) < buttonRadius and abs(mouse[1] - 470) < buttonRadius and click[0] == 1:
             if clickflag == 1:
-                buttonCircle(screen, colors[4][1], (700, 470), "Power ON", smallerText, (255, 255, 255),
-                         (Scrwidth / 2+100 , Scrheight / 2 + 170))
+                button_circle(screen, colors[4][1], (700, 470), "Power ON", smaller_text, (255, 255, 255),
+                         (scr_width / 2+100 , scr_height / 2 + 170))
                 clickflag=0
                 powerEnable=1    
             else:
-                buttonCircle(screen, colors[4][1], (700, 470), "Power OFF", smallerText, (255, 255, 255),
-                         (Scrwidth / 2+100, Scrheight / 2 + 170))      
+                button_circle(screen, colors[4][1], (700, 470), "Power OFF", smaller_text, (255, 255, 255),
+                         (scr_width / 2+100, scr_height / 2 + 170))      
                 clickflag=1
                 powerEnable = 0
         elif powerEnable == 1:
-            buttonCircle(screen, colors[4][1], (700, 470), "Power ON", smallerText, (255, 255, 255),
-                         (Scrwidth / 2+100 , Scrheight / 2 + 170))
+            button_circle(screen, colors[4][1], (700, 470), "Power ON", smaller_text, (255, 255, 255),
+                         (scr_width / 2+100 , scr_height / 2 + 170))
 
         
         elif powerEnable == 0:
-            buttonCircle(screen, colors[4][1], (700, 470), "Power OFF", smallerText, (255, 255, 255),
-                         (Scrwidth / 2+100, Scrheight / 2 + 170))
+            button_circle(screen, colors[4][1], (700, 470), "Power OFF", smaller_text, (255, 255, 255),
+                         (scr_width / 2+100, scr_height / 2 + 170))
 
         # quit button
         if abs(mouse[0] - 1000) < buttonRadius and abs(mouse[1] - 470) < buttonRadius:

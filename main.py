@@ -1,4 +1,5 @@
 import sys
+import random
 from pygame.locals import *
 from paddle import Paddle
 from puck import Puck
@@ -6,6 +7,7 @@ from startScreen import air_hockey_start, disp_text
 from themeScreen import theme_screen
 from globals import *
 from endScreen import game_end
+from powerups import Powerup1
 
 # Globals, initialized in method `init()`
 
@@ -212,11 +214,11 @@ def hits_pause_area(mouse_xy):
            (abs(mouse_xy[1] - (height - 70 + 32)) < const.PAUSE_BUTTON_RADIUS)
 
 
-def renderPlayingArea1(backgroundColor):
+def renderPlayingArea1(background_color):
     global flag,time2,goalwt1, goalwt2 , goalht1 , goalht2 , goaldp1 , goaldp2,seconds
 
     # Render Logic
-    screen.fill(backgroundColor)
+    screen.fill(background_color)
     # center circle
     pygame.draw.circle(screen, const.WHITE, (width / 2, height / 2), 70, 5)
     # borders
@@ -253,9 +255,9 @@ def renderPlayingArea1(backgroundColor):
     if seconds>=time2+10 :
         flag=1
         powerup1.Active = True
-        goalwt1 = goalwt2= const.GOALWIDTH
-        goalht1  = goalht2 = const.GOALY1
-        goaldp1 = goaldp2 = const.GOALY2
+        goalwt1 = goalwt2= const.GOAL_WIDTH
+        goalht1  = goalht2 = const.GOAL_Y1
+        goaldp1 = goaldp2 = const.GOAL_Y2
 
     # goals
     
@@ -267,7 +269,7 @@ def renderPlayingArea1(backgroundColor):
     # PAUSE
     screen.blit(pause_image, (width / 2 - 32, height - 70))
 
-def renderPlayingArea(backgroundColor):
+def renderPlayingArea(background_color):
     # Render Logic
     screen.fill(background_color)
     # center circle
@@ -449,9 +451,9 @@ def game_loop(speed, player1_color, player2_color, background_color, player_1_na
         #print(str(powerEnable))
         # playing area should be drawn first
         if powerEnable == 0:
-            renderPlayingArea(backgroundColor)
+            renderPlayingArea(background_color)
         else:
-            renderPlayingArea1(backgroundColor)
+            renderPlayingArea1(background_color)
 
         # show score
         score(score1, score2, player_1_name, player_2_name)
@@ -488,7 +490,7 @@ if __name__ == "__main__":
     mute = False  # to keep state of mute
     init()
     while True:
-        gameChoice, player1_color, player2_color, mute, player_1_name, player_2_name = air_hockey_start(screen, clock, width, height, mute)
+        gameChoice, player1_color, player2_color, mute, player_1_name, player_2_name , powerEnable = air_hockey_start(screen, clock, width, height, mute)
         background_color = theme_screen(screen, clock, width, height, mute)
         init()
         if gameChoice == 1:
